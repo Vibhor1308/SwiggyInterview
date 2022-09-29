@@ -1,5 +1,7 @@
 package com.example.movieproject.di
 
+import com.example.movieproject.model.remote.ApiClass
+import com.example.movieproject.model.repository.Repository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -12,5 +14,13 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideApiInstance():ApiClass
+    fun provideApiInstance(): ApiClass {
+        return ApiClass()
+    }
+
+    @Provides
+    @Singleton
+    fun provideRepository(api:ApiClass):Repository{
+        return Repository(api)
+    }
 }
